@@ -1,13 +1,13 @@
 <template>
-  <q-layout view="hHh lpR fFf" class="my-font">
-    <q-header bordered>
+  <q-layout view="hHh lpR fFf" class="my-font q-pa-md q-pa-sm-xl">
+    <q-header bordered >
       <q-toolbar
         glossy
         :class="{
           'text-black': !$q.dark.isActive,
           'bg-dark': $q.dark.isActive,
         }"
-        style="padding-left: 50px; padding-right: 50px"
+        class="q-px-md q-px-sm-xl"
       >
         <q-toolbar-title class="text-bolder" style="font-size: 16px">
           Where in the world?
@@ -21,15 +21,15 @@
           no-caps
           :icon="
             $q.dark.isActive
-              ? 'img:src/assets/filled_dark_mode_white.png'
-              : 'img:src/assets/outline_dark_mode.png'
+              ? 'light_mode'
+              : 'dark_mode'
           "
           @click="$q.dark.toggle()"
         />
       </q-toolbar>
     </q-header>
 
-    <q-page-container>
+    <q-page-container class="relative-position">
       <router-view />
     </q-page-container>
   </q-layout>
