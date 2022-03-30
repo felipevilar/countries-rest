@@ -1,37 +1,33 @@
 <template>
-  <q-page
-    style="
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-bottom: 50px;
-      margin: 0 auto;
-    "
-    class="relative-position"
-  >
-    <div style="width: 100%; padding: 25px 0px; display: flex" class="wrap">
+  <q-page class="relative-position">
+    <div 
+      class="flex wrap justify-sm-between justify-xs-center q-gutter-y-md fixed-top bg-white q-px-xl"
+      style="top: 65px;z-index: 1000;padding-bottom: 20px;">
       <q-input
         outlined
         dense
+        square
         placeholder="Search for a country"
         v-model="search"
         style="width: 300px"
+        :class="{ 'full-width': $q.screen.xs }"
       >
         <template v-slot:prepend>
           <q-icon name="search"></q-icon>
         </template>
       </q-input>
-      <q-space></q-space>
       <q-select
         style="width: 200px"
+        :class="{ customWidth: $q.screen.xs }"
+        square
         dense
-        class="q-pt-xs-lg"
         label="Filter by Region"
         outlined
         v-model="selected"
         :options="options"
       />
     </div>
-    <div v-if="countries" class="fit row wrap justify-between q-gutter-y-lg">
+    <div v-if="countries" class="column row-sm content-center fit wrap justify-between">
       <Country-Card
         v-for="(country, index) in countries"
         :key="index"
@@ -39,7 +35,7 @@
       >
       </Country-Card>
     </div>
-    <q-inner-loading :showing="loading">
+    <q-inner-loading :showing="loading" class="bg-transparent">
       <q-spinner-puff size="50px" color="primary" />
     </q-inner-loading>
   </q-page>
@@ -87,3 +83,8 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+.customWidth {
+  width: 75% !important;
+}
+</style>

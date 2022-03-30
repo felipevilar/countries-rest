@@ -1,34 +1,24 @@
 <template>
-  <q-page
-    style="
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-bottom: 50px;
-      margin: 0 auto;
-    "
-    class="relative-position"
-  >
-    <div class="row" style="margin-top: 50px; margin-bottom: 50px">
-      <div class="col">
-        <q-btn
-          no-caps
-          label="Back"
-          @click="$router.push('/')"
-          icon="arrow_back"
-        ></q-btn>
-      </div>
+  <q-page class="relative-position">
+    <div class="q-mb-xl q-mt-lg">
+      <q-btn
+        no-caps
+        label="Back"
+        @click="$router.push('/')"
+        icon="arrow_back"
+        :class="{shadow: $q.dark.isActive}"
+      ></q-btn>
     </div>
     <div class="row" v-if="country">
-      <div class="col-12 col-xs-6" style="padding: 15px">
+      <div class="col-12 col-sm-6 q-py-sm-lg q-px-sm-none q-pa-md-xl">
         <q-img :src="country.flags.png" height="350px" fit="fill"></q-img>
       </div>
-      <div
-        class="col-12 col-xs-6"
-        style="padding: 40px; padding-left: 75px; padding-right: 75px"
-      >
-        <h5 class="no-margin text-bolder">{{ country.name.common }}</h5>
-        <div class="row q-mt-lg">
-          <div class="col">
+      <div class="col-12 col-sm-6 q-px-md-xl q-px-sm-lg" >
+        <div class="row">
+          <h5 class="text-bolder">{{ country.name.common }}</h5>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6">
             <p class="q-mb-sm">
               <span class="text-bold">Native Name: </span
               ><span>{{ nativeName }}</span>
@@ -49,7 +39,7 @@
               <span class="text-bold">Capital: </span><span>{{ capital }}</span>
             </p>
           </div>
-          <div class="col">
+          <div class="col-12 col-sm-6 q-my-lg q-my-sm-none">
             <p class="q-mb-sm">
               <span class="text-bold">Top Level Domain: </span
               ><span>{{ country.tld[0] }}</span>
@@ -64,9 +54,20 @@
             </p>
           </div>
         </div>
+        <div class="row q-mt-xl">
+          <p class="flex q-mb-sm items-baseline">
+            <span class="text-bold">Borders Countries:</span>
+            <q-card
+              v-for="(b, index) in borders"
+              :key="index"
+              class="q-pa-xs q-mx-sm"
+              unelevated
+            >{{b}}</q-card>
+          </p>
+        </div>
       </div>
     </div>
-    <q-inner-loading :showing="loading">
+    <q-inner-loading :showing="loading" class="bg-transparent">
       <q-spinner-puff size="50px" color="primary" />
     </q-inner-loading>
   </q-page>
@@ -75,10 +76,11 @@
 <script lang="ts">
 import { api } from '../boot/axios';
 import { defineComponent, ref, onMounted } from 'vue';
-import { Country } from '../types/Countries';
+import { Country, cc } from '../types/Countries';
 // import { AxiosResponse } from 'axios';
 import { useRoute } from 'vue-router';
 import { AxiosResponse } from 'axios';
+import codes from '../boot/countriesCode'
 
 export default defineComponent({
   name: 'CountryDetailsPage',
@@ -90,9 +92,10 @@ export default defineComponent({
     const nativeName = ref('');
     const currencies = ref('');
     const languages = ref('');
+    const borders = ref<string[]>([])
     const capital = ref('');
     const loading = ref(false);
-
+  
     onMounted(async () => {
       try {
         loading.value = true;
@@ -112,7 +115,7 @@ export default defineComponent({
 
     const getCapital = (country: Country) => {
       if (country.capital) {
-        capital.value = country.capital[0];
+        capital.value = country.capital.join(', ');
       } else {
         capital.value = 'None';
       }
@@ -139,11 +142,18 @@ export default defineComponent({
       }
     };
 
+    const getBorder = (country: Country) => {
+      country.borders.forEach((el) => {
+        borders.value.push(codes[el as cc])
+      })
+    }
+
     const getData = (country: Country) => {
       getCapital(country);
       getNativeName(country);
       getCurrencies(country);
       getLanguages(country);
+      getBorder(country)
     };
     return {
       country,
@@ -152,7 +162,13 @@ export default defineComponent({
       currencies,
       capital,
       loading,
+      borders
     };
   },
 });
 </script>
+<style scoped>
+.shadow {
+  box-shadow: 0 0 1em #000;
+}
+</style>

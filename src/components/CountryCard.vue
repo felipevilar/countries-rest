@@ -1,12 +1,13 @@
 <template>
+<div class="q-py-lg q-pr-lg" v-bind:class="{ cardWraper: $q.screen.xs }" v-if="filter">
   <q-card
-    style="width: 200px; height: fit-content; max-width: 50%;"
-    v-if="filter"
+    style="height: 300px; width: 275px;"
+    v-bind:class="{ active: $q.screen.xs }"
     @click="$router.push(`/${name}`)"
     class="cursor-pointer"
   >
-    <q-card-section class="no-padding" style="height: 125px">
-      <q-img :src="country.flags.png" height="125px" fit="fill"></q-img>
+    <q-card-section class="no-padding">
+      <q-img :src="country.flags.png" height="145px" fit="fill"></q-img>
     </q-card-section>
     <q-separator></q-separator>
     <q-card-section>
@@ -29,6 +30,7 @@
       </p>
     </q-card-section>
   </q-card>
+</div>
 </template>
 
 <script lang="ts">
@@ -51,23 +53,22 @@ export default defineComponent({
     const region = inject('region', ref(null));
     const name = ref(country.value.name.common);
 
-    const filter = computed(() => {
-      if (region.value) {
-        if (region.value === 'All') {
-          return name.value.includes(search.value);
-        }
-        return (
-          name.value
-            .toLocaleLowerCase()
-            .includes(search.value.toLocaleLowerCase()) &&
-          country.value.region === region.value
-        );
+    const filter = computed(() => {            
+      if (region.value === 'All' || !region.value) {
+        return name.value
+                .toLocaleLowerCase()
+                .includes(search.value.toLocaleLowerCase());
       }
-      return name.value.includes(search.value);
+      return (
+        name.value
+          .toLocaleLowerCase()
+          .includes(search.value.toLocaleLowerCase()) &&
+        country.value.region === region.value
+      );
     });
 
     if (country.value.capital) {
-      capital.value = country.value.capital[0];
+      capital.value = country.value.capital.join(', ');
     } else {
       capital.value = 'None';
     }
@@ -82,3 +83,11 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+.active {
+  width: 320px !important;
+}
+.cardWraper {
+  padding-right: initial !important;
+}
+</style>
