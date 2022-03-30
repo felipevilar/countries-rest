@@ -52,17 +52,9 @@ interface BRL {
   symbol: string;
 }
 
-interface Currencies {
-  BRL: BRL;
-}
-
 interface Idd {
   root: string;
   suffixes: string[];
-}
-
-interface Languages {
-  name: string;
 }
 
 interface TranslationDetail {
@@ -138,7 +130,6 @@ interface PostalCode {
   regex: string;
 }
 
-export type sdfsd = "TESTE"
 export type cc = 
   'ABW' |
   'AFG' |
