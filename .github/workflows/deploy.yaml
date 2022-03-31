@@ -24,7 +24,7 @@ jobs:
         run: |
           npm i
           NODE_ENV=production npx quasar build
-          cd dist
+          cd dist/spa
           git init
           git add -A
           git commit -m "🚀 Deploy id ${GITHUB_RUN_ID}"
