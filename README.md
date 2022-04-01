@@ -36,7 +36,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [GitHub Code](https://github.com/felipevilar/countries-rest)
-- Live Site URL: [Preview](https://62476cbe07c45128b94728cd--sprightly-youtiao-ef0c63.netlify.app/)
+- Live Site URL: [Preview](https://sprightly-youtiao-ef0c63.netlify.app/)
 
 ## My process
 
