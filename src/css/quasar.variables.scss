@@ -12,7 +12,7 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary   : hsl(0, 0%, 98%);
+$primary   : hsl(200, 15%, 8%);
 $secondary : #26A69A;
 $accent    : #9C27B0;
 
@@ -27,9 +27,11 @@ $warning   : #F2C037;
 $typography-font-family: 'nunitoLight', '-apple-system', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
 $text-weights: (light: 300, regular: 400, medium: 500, bold: 700, bolder: 800) !default;
 
+$separator-color: rgba(255, 255, 255, .8) !default;
+
 $separator-dark-color: #1D1D1D !default;
 
-$breakpoint-xs: 699px !default;
+$breakpoint-xs: 650px !default;
 // $breakpoint-sm: 599px !default;
 // $breakpoint-md: 1439px !default;
 // $breakpoint-lg: 1919px !default;
