@@ -11,7 +11,9 @@
     </div>
     <div class="row" v-if="country">
       <div class="col-12 col-sm-6 q-py-sm-lg q-px-sm-none q-pa-md-xl">
-        <q-img :src="country.flags.png" height="350px" fit="fill"></q-img>
+        <div style="max-width: 650px;margin: 0 auto;">
+          <q-img :src="country.flags.png" height="400px" fit="contain"></q-img>
+        </div>
       </div>
       <div class="col-12 col-sm-6 q-px-md-xl q-px-sm-lg" >
         <div class="row">
@@ -57,12 +59,14 @@
         <div class="row q-mt-xl">
           <p class="flex q-mb-sm items-baseline">
             <span class="text-bold">Borders Countries:</span>
-            <q-card
+            <q-badge
               v-for="(b, index) in borders"
               :key="index"
-              class="q-pa-xs q-mx-sm"
+              class="q-pa-sm q-ma-xs"
+              :color="$q.dark.isActive ? 'dark' : 'grey-4'"
+              :text-color="$q.dark.isActive ? 'white' : 'grey-10'"
               unelevated
-            >{{b}}</q-card>
+            >{{b}}</q-badge>
           </p>
         </div>
       </div>
