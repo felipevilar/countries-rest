@@ -62,7 +62,7 @@ module.exports = configure(function (ctx) {
       vueRouterMode: 'history', // available values: 'hash', 'history'
 
       // transpile: false,
-      publicPath: 'https://sprightly-youtiao-ef0c63.netlify.app/',
+      publicPath: '/',
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
