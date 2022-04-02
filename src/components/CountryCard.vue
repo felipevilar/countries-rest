@@ -1,12 +1,12 @@
 <template>
   <q-card
-    style="height: 300px; width: 275px; padding: 1.5px"
+    style="height: 300px; width: 275px; padding: 1px"
     v-bind:class="{ active: $q.screen.xs }"
     @click="$router.push(`/${name}`)"
     class="cursor-pointer"
   >
     <q-card-section class="no-padding" style="border: 1px solid lightgrey">
-      <q-img :src="country.flags.png" height="145px" fit="fill"></q-img>
+      <q-img :src="country.flags.svg" height="145px" fit="cover"></q-img>
     </q-card-section>
     <q-separator></q-separator>
     <q-card-section>

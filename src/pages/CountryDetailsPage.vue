@@ -12,7 +12,7 @@
     <div class="row" v-if="country">
       <div class="col-12 col-sm-6 q-py-sm-lg q-px-sm-none q-pa-md-xl">
         <div style="max-width: 650px;margin: 0 auto;">
-          <q-img :src="country.flags.png" height="400px" fit="contain"></q-img>
+          <q-img :src="country.flags.svg" height="400px" fit="contain"></q-img>
         </div>
       </div>
       <div class="col-12 col-sm-6 q-px-md-xl q-px-sm-lg" >
